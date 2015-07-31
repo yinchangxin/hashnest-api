@@ -1,10 +1,10 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'hash_nest/version'
+require 'hashnest/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "hashnest-api"
+  spec.name          = "hashnest"
   spec.version       = HashNest::VERSION
   spec.authors       = ["charls","yin"]
   spec.email         = ["changxin.yin@bitmain.com"]
