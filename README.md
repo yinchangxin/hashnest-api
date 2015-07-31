@@ -1,56 +1,61 @@
-gem 'hashnest', :require => 'hashnest',git: 'git@github.com:yinchangxin/hashnest-api.git'
 
-API file
-========
+HashNest API integration. Ruby gem.
 
-Verification method
--------------------
+## Installation
 
-```ruby
-Param:
-  access_key: API KEY is created in the users account page
-  nonce: Nonce is a regular integer number in UTC Time
-  signature: Signature is a HMAC-SHA256 encoded message containing: nonce, client ID and API key. The HMAC-SHA256 code must be generated using a secret key that was generated with your API key. You must use the HMAC-SHA256 that created by API key when you sign.
-```
+Add this line to your application's Gemfile:
 
-##### API key
+    gem 'hashnest'
 
-To get an API key, go to "Finance", "Setting" Tab. Set permissions and click "Generate key".
+And then execute:
 
-##### Nonce
+    $ bundle
 
-Nonce is a timestamp in integer, stands for milliseconds elapsed since Unix epoch. Nonce must be within 30 seconds of server's current time. Each nonce can only be used once.
+Or install it yourself as:
 
-##### Signature
+    $ gem install hashnest
 
-Signature is a HMAC-SHA256 encoded message containing: nonce, client ID and API key. The HMAC-SHA256 code must be generated using a secret key that was generated with your API key. This code must be converted to it's hexadecimal representation (64 characters).
-Example (Python):
 
-```ruby
-  message = nonce + username + access_key
-  signature = hmac.new(secret_key, msg=message, digestmod=hashlib.sha256).hexdigest()
-```
 
-For example: To obtain all opened markets URL:
+### Usage
+
+####How to use?
+
+####1. Create your ruby project
+
+####2. Add "require 'hashnest'")
+
+####3. Create class
 
 ```ruby
-https://www.hashnest.com/api/v1/currency_markets?access_key=PZMhwXRx75mNqGhl430mLUhqODzyhQSf1bAiB4Tf&nonce=1416974538344337&signature=e1e0051e8fe8aa681ca465567567aaff231f56db54d3d3fb7f49cbf17871097e
+  api = Hashnest::API.new(username, key, secret)
+```
+```
+username - your username on hashnest
+key - your API key
+secret - your API secret code
 ```
 
-All APIs below need to be verified by this way.
+####4. Methods and parameters:
 
+
+##Full API documentation: https://www.hashnest.com/hashnest_api
+
+
+##Examples
 Account Info
 ------------
 ### Query Account Info
 
+```ruby
+api = Hashnest::API.new(username, key, secret)
 ```
-HTTP METHOD: POST
-HTTP URL: https://www.hashnest.com/api/v1/account
-Param:
-  access_key: (Details see the verification method)
-  nonce: (Details see the verification method)
-  signature: (Details see the verification method)
 
+```ruby
+puts api.account
+```
+
+```
 Return Result:
   {
     id: 12,
@@ -59,22 +64,13 @@ Return Result:
   }
 ```
 
-
-
-
-Currency account API
---------------------
-
 ### Check users account balance
 
+```ruby
+puts api.currency_accounts
 ```
-HTTP METHOD: POST
-HTTP URL: https://www.hashnest.com/api/v1/currency_accounts
-Param:
-  access_key: (Details see the verification method）
-  nonce: (Details see the verification method）
-  signature: (Details see the verification method）
 
+```
 Return Result:
   [
     {
@@ -101,14 +97,12 @@ Hash rate account API
 
 ### Check user's hash rate account balance
 
-```
-HTTP METHOD: POST
-HTTP URL: https://www.hashnest.com/api/v1/hash_accounts
-Param:
-  access_key: (Details see the verification method）
-  nonce: (Details see the verification method）
-  signature: (Details see the verification method）
 
+```ruby
+puts api.hash_accounts
+```
+
+```
 Return Result:
 [
   {
@@ -136,15 +130,11 @@ Trading order API
 
 ### Check user's active entrust order
 
+```ruby
+puts api.order_active
 ```
-HTTP METHOD: POST
-HTTP URL: https://www.hashnest.com/api/v1/orders/active
-Param:
-  access_key: (Details see the verification method）
-  nonce: (Details see the verification method）
-  signature: (Details see the verification method）
-  currency_market_id(交易市场ID): 1...
 
+```
 Return Result:
 
 [
@@ -159,18 +149,11 @@ Return Result:
 
 ```
 
-### Check user's trading order
+```ruby
+puts api.order_history currency_market_id, page=1, page_per_amount=20
+```
 
 ```
-HTTP METHOD: POST
-HTTP URL: https://www.hashnest.com/api/v1/orders/history
-Param:
-  access_key: (Details see the verification method）
-  nonce: (Details see the verification method）
-  signature: (Details see the verification method）
-  currency_market_id: 1..
-  page: （Optional, default first page）
-  page_per_amount: (Optional, default 20 records)
 
 Return Result:
 [
@@ -186,18 +169,11 @@ Return Result:
 
 ### Create an entrust order
 
+```ruby
+puts api.trade currency_market_id, category(sale|), amount, ppc
 ```
-HTTP METHOD： POST
-HTTP URL: https://www.hashnest.com/api/v1/orders
-Param:
-  access_key: (Details see the verification method）
-  nonce: (Details see the verification method）
-  signature: (Details see the verification method)
-  currency_market_id: (Market ID)
-  amount: (amount of entrust order)
-  ppc: (unit price of entrust order)
-  category: (entrust type eg: [sale|purchase])
 
+```
 Return Result:
   Return to details of entrust order if successed
   eg:
