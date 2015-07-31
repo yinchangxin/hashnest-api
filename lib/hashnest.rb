@@ -7,7 +7,7 @@ require "uri"
 require "json"
 require "addressable/uri"
 
-module HashNest
+module Hashnest
   class API
     attr_accessor :api_key, :api_secret, :username, :nonce_v
 

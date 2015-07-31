@@ -5,13 +5,15 @@ require 'hashnest/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "hashnest"
-  spec.version       = HashNest::VERSION
+  spec.version       = Hashnest::VERSION
   spec.authors       = ["charls","yin"]
   spec.email         = ["changxin.yin@bitmain.com"]
   spec.description   = "Gem for acsess to api HashNest"
   spec.summary       = "HashNest api library"
-  spec.homepage      = "https://bitbucket.org/cd-bitmain/hashnest-api"
+  spec.homepage      = "https://github.com/yinchangxin/hashnest-api"
   spec.license       = "MIT"
+
+  spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
