@@ -80,12 +80,12 @@ module Hashnest
       api_call("currency_markets", {}, true)
     end
 
-    def currency_market_history
-      api_call("currency_markets", {}, true, 'order_history')
+    def currency_market_history currency_market_id
+      api_call("currency_markets", {currency_market_id: currency_market_id}, true, 'order_history')
     end
 
-    def currency_market_orders
-      api_call("currency_markets", {}, true, 'orders')
+    def currency_market_orders currency_market_id
+      api_call("currency_markets", {currency_market_id: currency_market_id}, true, 'orders')
     end
 
     def get url, param
