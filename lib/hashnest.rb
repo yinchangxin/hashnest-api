@@ -72,8 +72,8 @@ module Hashnest
       api_call("orders", {order_id: order_id}, true, 'revoke')
     end
 
-    def quick_revoke currency_market_id
-      api_call("orders", {currency_market_id: currency_market_id}, true, "quick_revoke")
+    def quick_revoke currency_market_id, category
+      api_call("orders", {currency_market_id: currency_market_id, category: category}, true, "quick_revoke")
     end
 
     def currency_markets
