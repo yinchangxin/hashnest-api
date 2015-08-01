@@ -203,7 +203,7 @@ Return Result:
 ### cancel all entrust orders
 
 ```ruby
-puts api.quick_revoke currency_market_id
+puts api.quick_revoke currency_market_id, category(sale|purchase)
 ```
 
 ```
