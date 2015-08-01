@@ -170,7 +170,7 @@ Return Result:
 ### Create an entrust order
 
 ```ruby
-puts api.trade currency_market_id, category(sale|), amount, ppc
+puts api.trade currency_market_id, category(sale|purchase), amount, ppc
 ```
 
 ```
@@ -184,23 +184,15 @@ Return Result:
     ppc: "0.01", #unit price of entrust order
     created_at: "2014-12-09 01:00:25" #created time of entrust order
   }
-  Return to the faulty information if failed
-  eg:
-
-
 ```
 
 ### cancel an entrust order
 
+```ruby
+puts api.revoke_order order_id
 ```
-HTTP METHOD: POST
-HTTP URL: https://www.hashnest.com/api/v1/orders/revoke
-Param:
-  access_key: (details see the verification method）
-  nonce: (details see the verification method）
-  signature: (details see the verification method）
-  order_id:
 
+```
 Return Result:
 {
   success: true|false
@@ -210,15 +202,11 @@ Return Result:
 
 ### cancel all entrust orders
 
+```ruby
+puts api.quick_revoke currency_market_id
 ```
-HTTP METHOD: POST
-HTTP URL: https://www.hashnest.com/api/v1/orders/quick_revoke
-Param:
-  access_key: (details see the verification method）
-  nonce: (details see the verification method）
-  signature: (details see the verification method）
-  currency_market_id:
 
+```
 Return Result:
 {
   success: true|false
@@ -230,14 +218,11 @@ Open market API
 
 ### obtain all opened markets
 
+```ruby
+puts api.currency_markets
 ```
-HTTP METHOD: POST
-HTTP URL: https://www.hashnest.com/api/v1/currency_markets
-Param:
-  access_key: (details see the verification method）
-  nonce: (details see the verification method）
-  signature: (details see the verification method）
 
+```
 Return Result
 [
   {
@@ -250,16 +235,11 @@ Return Result
 
 ### Obtain the trading order list on pointed market
 
+```ruby
+puts api.currency_market_history currency_market_id
 ```
-HTTP METHOD: POST
-HTTP URL: https://www.hashnest.com/api/v1/currency_markets/order_history
-Param:
-  access_key: (details see the verification method）
-  nonce: (details see the verification method）
-  signature: (details see the verification method）
-  category: (entrust type eg: [sale|purchase])
-  currency_market_id: (Market ID)
 
+```
 Return Result:
 [
   {
@@ -271,3 +251,23 @@ Return Result:
 ]
 
 ```
+
+### Market Depth
+
+```ruby
+puts api.currency_market_orders currency_market_id
+```
+
+```
+Return Result:
+{
+  "purchase"=> [
+    {"ppc"=>0.0013382, "category"=>"purchase", "amount"=>85}
+  ], 
+  "sale"=> [
+    {"ppc"=>0.0199, "category"=>"sale", "amount"=>88}
+  ]
+}
+
+```
+
