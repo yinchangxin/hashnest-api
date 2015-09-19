@@ -5,16 +5,11 @@ HashNest API integration. Ruby gem.
 
 Add this line to your application's Gemfile:
 
-    gem 'hashnest'
+    gem 'hashnest', github: 'yinchangxin/hashnest-api'
 
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install hashnest
-
 
 
 ### Usage
